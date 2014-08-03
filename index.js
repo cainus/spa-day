@@ -1,8 +1,12 @@
-var app = require('./app');
+var getApp = require('./getApp');
 var http = require('http');
+CONFIG = require('./config');
 
-http.createServer(app).listen(3000, function(err){
+getApp(function(err, app){
   if (err) throw err;
-  console.log("server listening on port 3000");
+  http.createServer(app).listen(CONFIG.port, function(err){
+    if (err) throw err;
+    console.log("server listening on port ", CONFIG.port);
+  });
 });
 
