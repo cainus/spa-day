@@ -3,15 +3,12 @@ var _ = require('lodash');
 var config = {
 
   test : {
-    mongo : {
-      name : 'test'
-    },
     port : 4000
   },
 
   default : {
     mongo : {
-      name : 'spa_day'
+      connectionString : 'mongodb://localhost:27017/spaday',
     },
     hostname : 'localhost',
     port : 3000,

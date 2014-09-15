@@ -1,5 +1,5 @@
 --require ./testHelpers
---globals CONFIG
+--globals JSV
 --check-leaks
 --reporter dot
 --ui bdd

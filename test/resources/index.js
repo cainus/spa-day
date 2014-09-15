@@ -1,3 +1,8 @@
+Object.defineProperty(global, "_validateSomeFields", {
+    set : function(value) {
+        throw new Error("SHIT!");
+    }
+});
 
 describe('root resource', function(req, res){
   before(function(done){

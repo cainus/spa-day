@@ -6,11 +6,24 @@ var difflet = require('difflet');
 var deepEqual = require('deep-equal');
 var traverse = require('traverse');
 var assert = require('assert');
+var database = require('./database');
 
 process.env.ENV = 'test';
 console.log("set process.env.ENV to ", process.env.ENV);
 
 CONFIG = require('./config');
+
+
+model = function(modelName){
+  return require('./models/' + modelName);
+};
+
+
+setupDb = function(cb){
+  database.get(function(err, db){
+    cb(err, db);
+  });
+};
 
 var serv;
 

@@ -1,11 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
-var Server = require('mongodb').Server;
+var CONFIG = require('./config');
 var db = null;
-
-// Set up the connection to the local db
-var mongoclient = new MongoClient(
-    new Server("localhost", 27017), {native_parser: true}
-);
 
 module.exports = {
 
@@ -13,14 +8,19 @@ module.exports = {
     if (db) {
       return cb(null, db);
     }
-    // Open the connection to the server
-    mongoclient.open(function(err, mongoclient) {
+    MongoClient.connect(CONFIG.mongo.connectionString, function(err, theDb) {
       if (err)
         return cb(err);
-      // Get the first db and do an update document on it
-      db = mongoclient.db("tests");
+      db = theDb;
       return cb(null, db);
     });
+  },
+
+  getSync : function(){
+    if (!db){
+      throw new Error("the database is not yet initialized!");
+    }
+    return db;
   }
 
 }
